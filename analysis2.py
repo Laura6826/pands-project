@@ -25,7 +25,10 @@ swidth = df['sepal_width']
 # Create subplots
 # This is how i will code how i want the histograms to appear.
 fig, ax = plt.subplots(4,3, figsize=(15, 15))
-fig.suptitle("Histogram of Petal Length (cm),\nsubdivided by iris species", color='orange',fontweight='bold', fontsize=14)
+fig.suptitle("Histogram of Petal Length (cm),subdivided by iris species", color='orange',fontweight='bold', fontsize=14)
+plt.rc('font', size=10)        # Controls default text size
+plt.rc('axes', labelsize=10)   # Font size of the x and y labels
+
 # Lets highlight the main title by changing the text colour to orange and making bold (as above).
 
 # Lets start some work on each individual plot
