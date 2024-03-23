@@ -98,3 +98,4 @@ ax[3,2].set_xlabel('Sepal Width (cm)')
 # Reference: https://stackoverflow.com/questions/6541123/improve-subplot-size-spacing-with-many-subplots
 plt.subplots_adjust(top=0.8, wspace=0.3, hspace=0.5)
 plt.show()
+plt.savefig('Histogram of Petal Length (cm),subdivided by iris species.png')
