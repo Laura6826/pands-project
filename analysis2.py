@@ -1,3 +1,6 @@
+# This is an analysis of the Fisher Iris Data set.
+# Author: Laura Lyons
+
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -22,8 +25,7 @@ swidth = df['sepal_width']
 # Fit a straight line between sepal length and sepal width
 # m2, c2 = np.polyfit(slen, swidth, 1)
 
-# Create subplots
-# This is how i will code how i want the histograms to appear.
+# Create a figure containing a subplot for all the variables, subdivided by iris species using subplots.
 fig, ax = plt.subplots(4,3, figsize=(15, 15))
 fig.suptitle("Histogram of Petal Length (cm),subdivided by iris species", color='orange',fontweight='bold', fontsize=14)
 plt.rc('font', size=10)        # Controls default text size
