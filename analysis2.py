@@ -9,15 +9,6 @@ df=pd.read_csv('https://raw.githubusercontent.com/mwaskom/seaborn-data/master/ir
 versicolor_df = df[df["species"] == "versicolor"]
 setosa_df=df[df["species"] == "setosa"]
 virginica_df=df[df["species"] == "virginica"]
-'''
-# Create a histogram of petal length for the "versicolor" species
-plt.figure(figsize=(8, 6))
-sns.histplot(versicolor_df["petal_length"], bins=10, kde=True, color="blue")
-plt.title("Histogram of Petal Length (Versicolor)")
-plt.xlabel("Petal Length (cm)")
-plt.ylabel("Frequency")
-plt.show()
-'''
 
 # Extract data
 plen = df['petal_length']
@@ -33,28 +24,47 @@ swidth = df['sepal_width']
 
 # Create subplots
 # This is how i will code how i want the histograms to appear.
-fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+fig, ax = plt.subplots(2,3)
+fig.suptitle("Histogram of Petal Length (cm) subdivided by iris species", color='orange')
+#fig.title('Histogram of the petal lenght (cm) for each species')
 
-ax1.hist(versicolor_df["petal_length"], bins=10, color="blue")
-ax1.set_xlabel('Petal Length (cm)')
-ax1.set_ylabel('Frequency')
-ax1.set_title('Histogram of Petal Length (Versicolor)')
-ax1.legend()
-# Set axes limits.
-'''ax1.set_xlim(0, 8)
-ax1.set_ylim(0, 4)'''
+# Lets start some work on each individual plot
+# Plot 1- Veriscolor (Petal Length)
+ax[0,0].hist(versicolor_df["petal_length"], bins=10, color="blue", edgecolor='black')
+ax[0,0].set_xlabel('Petal Length (cm)')
+ax[0,0].set_ylabel('Frequency')
+ax[0,0].set_title('Versicolor')
+
+# No limits are set, as this will skew the visual representation of the data.
+
+# Plot 2- Setosa (Petal Length)
+ax[0,1].hist(setosa_df["petal_length"], bins=10, color="red", edgecolor='black')
+ax[0,1].set_xlabel('Petal Length (cm)')
+ax[0,1].set_title('Setosa')
+
+# Plot 3- Virginica (Petal Length)
+ax[0,2].hist(virginica_df["petal_length"], bins=10, color="green", edgecolor='black')
+ax[0,2].set_xlabel('Petal Length (cm)')
+ax[0,2].set_title('Virginica')
+
+# Plot 4- Veriscolor (Petal Width)
+ax[1,0].hist(versicolor_df["petal_width"], bins=10, color="blue", edgecolor='black')
+ax[1,0].set_xlabel('Petal Width (cm)')
+ax[1,0].set_ylabel('Frequency')
+ax[1,0].set_title('Versicolor')
+
+# Plot 5- Setosa (Petal Width)
+ax[1,1].hist(setosa_df["petal_width"], bins=10, color="red", edgecolor='black')
+ax[1,1].set_xlabel('Petal Width (cm)')
+ax[1,1].set_title('Setosa')
+
+# Plot 6- Virginica (Petal Width)
+ax[1,2].hist(virginica_df["petal_width"], bins=10, color="green", edgecolor='black')
+ax[1,2].set_xlabel('Petal Width (cm)')
+ax[1,2].set_title('Virginica')
 
 
-ax2.hist(setosa_df["petal_length"], bins=10, color="red")
-ax2.set_xlabel('Petal Length (cm)')
-ax2.set_ylabel('Frequency')
-ax1.set_title('Histogram of Petal Length (Setosa)')
-ax1.legend()
-
-ax3.hist(virginica_df["petal_length"], bins=10, color="green")
-ax3.set_xlabel('Petal Length (cm)')
-ax3.set_ylabel('Frequency')
-ax3.set_title('Histogram of Petal Length (Virginica)')
-ax3.legend()
-
+# Adjust spacing between subplots
+# Reference: https://www.geeksforgeeks.org/how-to-set-the-spacing-between-subplots-in-matplotlib-in-python/
+plt.subplots_adjust(wspace=0.5, hspace=0.5)
 plt.show()
