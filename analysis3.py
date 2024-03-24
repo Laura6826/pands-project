@@ -4,23 +4,24 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 import csv 
-
-'''iris='iris_dataset.csv'
-with open (iris,'r') as df:
-    summary= df.describe()
-    print (summary)'''
+import prettytable as pt
 
 # Load the Iris dataset
 df = pd.read_csv('iris_dataset.csv')
+styles = [dict(selector="th", props=[("text-align", "center")])]
+df.style.set_table_styles(styles)
 
-# Filter the data by the species and remove the index of the original data set.
-versicolor_df = df[df["species"] == "versicolor"].reset_index(drop=True)
-setosa_df=df[df["species"] == "setosa"].reset_index(drop=True)
-virginica_df=df[df["species"] == "virginica"].reset_index(drop=True)
+# Filter the data by the species.
+versicolor_df = df[df["species"] == "versicolor"]
+setosa_df=df[df["species"] == "setosa"]
+virginica_df=df[df["species"] == "virginica"]
 
-summary_versicolor = versicolor_df.describe()
-summary_setosa= setosa_df.describe()
-summary_virginica=virginica_df.describe()
+# To change the format of .describe() output:
+# To set the format for floating-point numbers: (.map(lambda x: f"{x:0.2f}")
+# Reference: https://stackoverflow.com/questions/55394854/how-to-change-the-format-of-describe-output
+summary_versicolor = versicolor_df.describe().map(lambda x: f"{x:0.2f}")
+summary_setosa= setosa_df.describe().map(lambda x: f"{x:0.2f}")
+summary_virginica=virginica_df.describe().map(lambda x: f"{x:0.2f}")
 
 # Define the CSV file path
 csv_file = "combined_summary_outputs.csv"
@@ -29,15 +30,19 @@ csv_file = "combined_summary_outputs.csv"
 # Write the outputs to the CSV file
 with open(csv_file, mode='w', newline='') as f:
     f.write('This is a summary of the 3 iris species from the Iris Dataset.\n\n')
-    data = csv.reader(f)
+    # This will add a heading to my 'output' .csv file.
+    '''data = csv.reader(f)
     for row in data:
-        print(' | '.join(row)) 
+        print(' | '.join(row))''' 
         
 with open(csv_file, mode='a', newline='') as f:
-    pd.concat([summary_versicolor]).to_csv(f)
+    f.write('Versicolor.\n') # This will add the heading 'Versicolor' to the data table.
+    pd.concat([summary_versicolor], axis=1).to_csv(f)
 with open(csv_file, mode='a', newline='') as f:
+    f.write('Setosa.\n')
     pd.concat([summary_setosa], axis=1).to_csv(f)
 with open(csv_file, mode='a', newline='') as f:
+    f.write('Virginica.\n')
     pd.concat([summary_virginica], axis=1).to_csv (f)
 '''(f)
 with open(csv_file,'a') as f:
@@ -53,12 +58,4 @@ table = df.describe()
 for row in table:
     print('| {:15} | {:^15} | {:>15} | {:<15} |'.format(*row))
 
-# Save the summary to a text file
-table.to_csv("iris_summary.txt", sep="\t")
-
-# Print a success message
-print("Summary of each variable saved to iris_summary.txt")
-# Show first few rows of the dataset
-#summary= df.describe()
-#print (summary)
 '''
