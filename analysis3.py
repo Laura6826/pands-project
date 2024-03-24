@@ -37,7 +37,7 @@ with open(csv_file, mode='w', newline='') as f:
         
 with open(csv_file, mode='a', newline='') as f:
     f.write('Versicolor.\n') # This will add the heading 'Versicolor' to the data table.
-    pd.concat([summary_versicolor], axis=1).to_csv(f)
+    f. write(summary_versicolor)
 with open(csv_file, mode='a', newline='') as f:
     f.write('Setosa.\n')
     pd.concat([summary_setosa], axis=1).to_csv(f)
