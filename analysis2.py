@@ -2,6 +2,7 @@
 # More detail is available in the README and accompanying Jupyternotebook.
 # Author: Laura Lyons
 
+# Import the libraries necessary for the analysis.
 import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -28,7 +29,6 @@ ax[0,0].hist(versicolor_df["petal_length"], bins=10, color="blue", edgecolor='bl
 ax[0,0].set_xlabel('Petal Length (cm)')
 ax[0,0].set_ylabel('Frequency')
 ax[0,0].set_title('Versicolor', fontweight='bold')
-
 # No limits are set, as this will skew the visual representation of the data.
 
 # Plot 2- Setosa (Petal Length)
@@ -100,3 +100,14 @@ swidth = df['sepal_width']
 
 # Fit a straight line between sepal length and sepal width
 # m2, c2 = np.polyfit(slen, swidth, 1)
+
+# Lets get a summary of all the variables, subdivided by iris species.
+summary_of_versicolor= versicolor_df.describe()
+
+# Format the output as a table
+formatted_summary_of_versicolor = summary_of_versicolor.to_markdown()
+print(formatted_summary_of_versicolor)
+
+# Print the formatted table
+formatted_summary_of_versicolor.to_csv("Summary of Versicolor.txt", sep="\t", index=False)
+print(" A summary of the variables according to the iris species.txt")
